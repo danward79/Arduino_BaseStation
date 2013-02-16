@@ -17,7 +17,7 @@
  12      - SO, Ethernet, RFM12 SDO
  13      - SCK, Ethernet, RFM12 SCK
  Analogue
- 1
+ 1 
  2
  3
  4       - Data, DS1307 
