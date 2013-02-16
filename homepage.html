@@ -1,0 +1,31 @@
+<!-- Template/Experiment HTML used in BaseStation Code -->
+<html>
+	<head>
+	<meta http-equiv='refresh' content='5;url=?'/>
+		<title>Base Station</title>
+	</head>
+
+<body>
+	<h2>Base Station Interface</h2>
+	
+		<form>
+			<h3>Aquarium</h3>
+				Light: <input type="radio" name="a" value="1" >On
+				<input type="radio" name="a" value="0" checked>Off<br>
+				Temperature: 22 C<br>
+			<input type=submit value=Set>
+		</form>
+	
+		<form>
+			<h3>Time</h3>
+				Time: 22:23:23<br>
+			<input type="hidden" name=t value=1>
+			<input type=submit value=Send>
+		</form>
+		
+		<FORM METHOD="post" ACTION="">
+			
+			<input type=submit value=Refresh>
+		</form>
+</body>
+</html>
