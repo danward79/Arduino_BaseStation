@@ -57,9 +57,9 @@ static byte mymac[] = { 0x54,0x55,0x58,0x10,0x00,0x31 }; // ethernet mac address
 #define CSPIN 10				// Chip Select Pin Ethernet card
 #if STATIC
 	// ethernet interface ip address
-	static byte myip[] = { 192,168,1,15 };
+	static byte myip[] = { 10,0,1,4 };
 	// gateway ip address
-	static byte gwip[] = { 192,168,1,1 };
+	static byte gwip[] = { 10,0,1,1 };
 	//dns ip
 	static byte dnsip[] = { 8,8,8,8};
 #endif
@@ -132,7 +132,7 @@ void setup(){
 	if (ether.begin(sizeof Ethernet::buffer, mymac, CSPIN) == 0) 
 	{
 #if DEBUG
-		//Serial.println(F("Ethernet init failed"));
+		Serial.println(F("Ethernet init failed"));
 #endif
 	}
 		
@@ -147,8 +147,8 @@ void setup(){
 
 #if DEBUG
 	ether.printIp("IP:", ether.myip);
-	//ether.printIp("GW:", ether.gwip);  
-	//ether.printIp("DNS:", ether.dnsip);  
+	ether.printIp("GW:", ether.gwip);  
+	ether.printIp("DNS:", ether.dnsip);  
 #endif
  
 	// Reciever setup
