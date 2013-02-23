@@ -206,7 +206,6 @@ void loop()
 				sendToCosm(sd, PSTR("92072"));
 				
 				//Reset kWh at Midnight
-				//Get time 
 				DateTime now = RTC.now();
 				
 				if ((now.hour() == 0) & (now.minute() == 0)) todaysKwh = 0;
@@ -363,7 +362,6 @@ void loop()
 	}
 	
 	//6. Process Ethernet Data
-	//ether.packetLoop(ether.packetReceive());
 	int len = ether.packetReceive();
     int pos=ether.packetLoop(len);
 		
@@ -381,8 +379,9 @@ void loop()
 					homePage(data, bfill);
 				}
 			}
-			timeLong = 0L;
+			
 			//NTP Responce
+			timeLong = 0L;
 			if (ether.ntpProcessAnswer(&timeLong,clientPort)) 
 			{		   
 				if (timeLong) 
