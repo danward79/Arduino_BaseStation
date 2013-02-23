@@ -22,8 +22,7 @@
  3
  4       - Data, DS1307 
  5       - Clock, DS1307 
-*/
-#define VERSION 310 //Software Version
+ */
 #define DEBUG 1
 
 //includes
