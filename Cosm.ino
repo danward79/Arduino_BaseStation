@@ -1,6 +1,7 @@
 // COSM change these settings to match your own setup
 #define APIKEY  "Your Key Here" 
 
+
 char cosmURL[] PROGMEM = "api.cosm.com";
 
 
