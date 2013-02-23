@@ -1,14 +1,13 @@
 // COSM change these settings to match your own setup
 #define APIKEY  "Your Key Here" 
 
-
 char cosmURL[] PROGMEM = "api.cosm.com";
 
 
 void sendToCosm(byte cosmData, char* cosmFeed)
 {
-	uint8_t cosmip[4] = {64,94,18,121};
-
+	uint8_t cosmip[4] = {216,52,233,121};
+	
 		ether.copyIp(ether.hisip, cosmip);
     
 		// generate the header with payload - note that the stash size is used,
@@ -32,7 +31,7 @@ void sendToCosm(byte cosmData, char* cosmFeed)
 #if DEBUG
 		Serial.print("Feed: ");
 		Serial.print(int(cosmFeed));
-		Serial.print(", Stash: ");
+		Serial.print(", Sh: ");
 		Serial.println(stash.freeCount());
 #endif
 }

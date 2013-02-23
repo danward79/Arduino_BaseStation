@@ -23,7 +23,7 @@
  4       - Data, DS1307 
  5       - Clock, DS1307 
  */
-#define DEBUG 1
+#define DEBUG 0
 
 //includes
 #include <EtherCard.h> //Ethernet Shield Library
@@ -60,7 +60,7 @@ static byte mymac[] = { 0x54,0x55,0x58,0x10,0x00,0x31 }; // ethernet mac address
 	// gateway ip address
 	static byte gwip[] = { 10,0,1,1 };
 	//dns ip
-	static byte dnsip[] = { 8,8,8,8};
+	static byte dnsip[] = { 10,0,1,1 };
 #endif
 
 //Timeserver setup

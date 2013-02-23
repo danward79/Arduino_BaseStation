@@ -3,7 +3,6 @@
 // http://tuxgraphics.org/~guido/javascript/base64-javascript.html
 #define KEY "Your Key Here" 
 
-
 char twitterURL[] PROGMEM = "api.supertweet.net";
 
 void sendToTwitter (byte tweetText) 
@@ -13,7 +12,7 @@ void sendToTwitter (byte tweetText)
 	
 	// generate the header with payload - note that the stash size is used,
 	// and that a "stash descriptor" is passed in as argument using "$H"
-	Stash::prepare(PSTR("POST /1/statuses/update.xml HTTP/1.1" "\r\n"
+	Stash::prepare(PSTR("POST /1.1/statuses/update.json HTTP/1.1" "\r\n"
           						"Host: $F" "\r\n"
           						"Authorization: Basic $F" "\r\n"
           						"User-Agent: Arduino EtherCard lib" "\r\n"                        
@@ -30,4 +29,9 @@ void sendToTwitter (byte tweetText)
 		{
 			Stash::initMap(56);
 		}
+
+#if DEBUG
+	Serial.print("Tweet, Sh: ");
+	Serial.println(stash.freeCount());
+#endif
 }
