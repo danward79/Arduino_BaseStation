@@ -31,10 +31,9 @@
 
 //Constants
 #define MYNODE 15            	// Node ID
-#define FREQ RF12_433MHZ     	// Frequency
+#define FREQ RF12_868MHZ     	// Frequency
 #define GROUP 212            	// Network group 
 #define EMONTX 5				// Current Monitor TX node ID
-#define WXTXIS 4
 #define WXTX 18					// Weather Sensor node ID
 #define BARO 17					// Barometer node ID
 #define AQUA 11					// Aquarium node ID
@@ -75,7 +74,7 @@ prog_char *ntpList[] PROGMEM = { ntp0, ntp1, ntp2, ntp3, ntp4 };
 
 
 // Packet buffer, must be big enough to packet and payload
-#define BUFFER_SIZE 500
+#define BUFFER_SIZE 550
 byte Ethernet::buffer[BUFFER_SIZE];
 uint8_t clientPort = 123;
 static BufferFiller bfill;
@@ -91,7 +90,7 @@ static BufferFiller bfill;
 //General Variables
 unsigned char currentBuf[7]; 
 static uint8_t currentTimeserver = 0;
-uint32_t lastTweet = 0;
+long lastTweet = 0;
 uint32_t lastNTP = -30000;
 uint32_t timeLong;
 Stash stash;
@@ -212,7 +211,7 @@ void loop()
 				
 				lastPwrMsg = millis();
 			}
-			if (node_id == WXTX or node_id == WXTXIS)
+			if (node_id == WXTX)
 			{
 				wxtx = *(payloadwxtx*) rf12_data;   
 				float h = wxtx.humidity * 0.1;
@@ -279,6 +278,12 @@ void loop()
 								
 				stash.save();
 
+#if DEBUG				
+				Serial.print(F("Pressure: "));
+				Serial.print(p);
+				Serial.print(F(", BaroBattery: "));
+				Serial.println(barotx.battery);
+#endif
 				sendToCosm(sd, PSTR("20161"));
 			}
         }
@@ -287,6 +292,10 @@ void loop()
 	//4. Update twitter every 20 mins
 	if ((millis() - lastTweet > TWEETPERIOD))
 	{
+#if DEBUG
+		Serial.print("Twt: ");
+		Serial.println(millis() - lastTweet);
+#endif
 		DateTime now = RTC.now();
 		
 		char time[5];
@@ -328,6 +337,10 @@ void loop()
 		sendToTwitter(sd);	
 	
 		lastTweet = millis();
+#if DEBUG
+		Serial.print("Twt: ");
+		Serial.println(lastTweet);
+#endif
 	}
 	
 	//5. Update NTP
